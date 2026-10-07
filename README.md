@@ -1,30 +1,33 @@
 # DeepSeek Harness
 
-English | [中文](README.zh.md)
+**This is a fork** of [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness), the open-source agent harness by DeepSeek AI, kept for local reference. The description below comes from the upstream project's own README and the files in this checkout.
 
-DeepSeek Harness (`dsh`) is an open-source agent harness developed by [DeepSeek AI](https://deepseek.com).
+DeepSeek Harness (`dsh`) uses an architecture where **everything is a plugin**, powered by [Cordis](https://github.com/cordiverse/cordis) (design described in [_A Programming Paradigm for Spatiotemporal Composability_](https://github.com/cordiverse/paper)).
 
-It uses an architecture where **everything is a plugin**, and is powered by [Cordis](https://github.com/cordiverse/cordis), whose design is described in [_A Programming Paradigm for Spatiotemporal Composability_](https://github.com/cordiverse/paper).
+## Features
 
-## Developer preview
+- Plugin-based agent runtime: tools, providers, UIs, and workflows are all plugins.
+- Web UI served locally (default `http://127.0.0.1:3080`).
+- TypeScript + Python client packages (`packages/`, `python/`), example plugins (`examples/`), and native components (`native/`).
+- Project website source in `website/`; full development and architecture docs in `docs/`.
+- i18n documentation (English + Chinese: `README.zh.md`, `CONTRIBUTING.zh.md`).
+- Third-party licenses disclosed in `THIRD_PARTY_NOTICES.md`.
 
-DeepSeek Harness is currently in _developer preview_ and is iterating rapidly. **THERE WILL BE COMPATIBILITY-BREAKING CHANGES.**
+## Tech stack
 
-## Run
+- pnpm workspaces, TypeScript, Vitest (unit, e2e, snapshot, web perf/stress configs).
+- Cordis plugin framework; tsdown for builds; Lefthook for git hooks; Knip for unused-export checks.
+- Python SDK under `python/` (`pytest.ini`).
 
-### Run from `npm`
+## Getting started
 
-Install `Node.js`, then run:
+Run from npm (no clone needed):
 
 ```sh
 npx @deepseek-ai/dsh web
 ```
 
-The command starts the Web UI, served at `http://127.0.0.1:3080` by default. See [Web UI guide](docs/user/guide/index.md).
-
-### Run from source
-
-To run from a repository checkout:
+Run from source:
 
 ```sh
 git clone https://github.com/deepseek-ai/deepseek-harness.git
@@ -34,24 +37,22 @@ pnpm run build
 pnpm dsh web
 ```
 
-## Community and support
+Then open the Web UI guide at `docs/user/guide/index.md`. For contributors: see `CONTRIBUTING.md`; agent conventions are in `AGENTS.md`; development setup in `docs/development.md`.
 
-- Feel free to submit feedback or bug reports through [GitHub Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions).
-- Add the [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic to your plugin repository for discoverability.
-- Join <a href="https://discord.gg/Ycq5dCaS4">DeepSeek Harness Discord community</a>.
+## Project structure
 
-## Contributing
+```
+├── apps/        # applications (including the web UI)
+├── packages/    # core and plugin packages
+├── python/      # Python SDK
+├── native/      # native components
+├── examples/    # example plugins
+├── docs/        # development, architecture, user guides
+├── website/     # project website
+├── scripts/     # build/dev scripts
+└── vendor/      # vendored dependencies
+```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+## Status
 
-## Development
-
-Start with the [development guide](docs/development.md) and [architecture documentation](docs/architecture.md).
-
-For agents, follow [AGENTS.md](AGENTS.md).
-
-## License
-
-[MIT](LICENSE)
-
-Third-party dependencies and their licenses are disclosed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+**Fork — developer preview.** Upstream warns the project is in developer preview and iterating rapidly, so **compatibility-breaking changes should be expected**. License: MIT.
